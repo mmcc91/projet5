@@ -1,41 +1,44 @@
-// images
+//  nbimg nombre image 
 const slides = [
+
 	{
 		image: "./assets/images/slideshow/slide1.jpg",
-		tagLine: "Impressions tous formats <span>en boutique et en ligne</span>",
+		tagLine: "Impressions tous formats <span> en boutique et en ligne</span>",
 	},
 	{
 		image: "./assets/images/slideshow/slide2.jpg",
-		tagLine: "Tirages haute définition grand format <span>pour vos bureaux et events</span>",
+		tagLine: "Tirages haute définition grand format <span> pour vos bureaux et events</span>",
 	},
 	{
 		image: "./assets/images/slideshow/slide3.jpg",
-		tagLine: "Grand choix de couleurs <span>de CMJN aux pantones</span>",
+		tagLine: "Grand choix de couleurs <span> de CMJN aux pantones</span>",
 	},
 	{
 		image: "./assets/images/slideshow/slide4.png",
 		tagLine: "Autocollants <span>avec découpe laser sur mesure</span>",
 	},
 ];
+// affiche dans la console le nb de slides dans ma boite 
+console.log(slides)
 
-// relie Variables et nom html
-let i = 0;
+// relie Constante/variable et nom html
+let nbimg = 0;
 const leftbtn = document.querySelector(".arrow_left");
 const rightbtn = document.querySelector(".arrow_right");
 const dotsContainer = document.querySelector(".dots");
 const img = document.querySelector(".banner-img");
 const txt = document.querySelector("p");
 
-// Créez et ajoutez les éléments .dot enfants en fonction de la longueur du tableau slides
-for (let j = 0; j < slides.length; j++) {
+// Creations des points .dot en fonction du nobre de slides image
+for (let j = nbimg; j < slides.length; j++) {
 	const dot = document.createElement("div");
 	dot.classList.add("dot");
 	// bullet change sur la bonne icone en cliquant 
 	dot.addEventListener("click", function () {
-		i = j
-		img.src = slides[i].image;
-		txt.innerHTML = slides[i].tagLine;
-		dynamicBullets(i);
+		nbimg = j
+		img.src = slides[nbimg].image;
+		txt.innerHTML = slides[nbimg].tagLine;
+		dynamicBullets(nbimg);
 	})
 	
 	dotsContainer.appendChild(dot);
@@ -48,25 +51,25 @@ const dotsbtn = dotsContainer.querySelectorAll(".dot");
 // Ajoutez la classe dot_selected à la première bullet (index 0)
 dotsbtn[0].classList.add("dot_selected");
 
-// Écouteurs de l'événements click  pour les boutons 
+// Écouteurs de l'événements click  pour les boutons droit et gauche
 leftbtn.addEventListener("click", function () {
-	i--;
-	if (i === -1) {
-		i = slides.length - 1;
+	nbimg--;
+	if (nbimg === -1) {
+		nbimg = slides.length - 1;
 	}
-	img.src = slides[i].image;
-	txt.innerHTML = slides[i].tagLine;
-	dynamicBullets(i);
+	img.src = slides[nbimg].image;
+	txt.innerHTML = slides[nbimg].tagLine;
+	dynamicBullets(nbimg);
 });
 
 rightbtn.addEventListener("click", function () {
-	i++;
-	if (i === slides.length) {
-		i = 0;
+	nbimg++;
+	if (nbimg === slides.length) {
+		nbimg = 0;
 	}
-	img.src = slides[i].image;
-	txt.innerHTML = slides[i].tagLine;
-	dynamicBullets(i);
+	img.src = slides[nbimg].image;
+	txt.innerHTML = slides[nbimg].tagLine;
+	dynamicBullets(nbimg);
 });
 
 
