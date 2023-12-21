@@ -61,13 +61,13 @@ rightbtn.addEventListener("click", slideRight);
 function slideLeft() {
 	nbimg--;
 	if (nbimg === -1) {
-		nbimg = slides.length - 1;
+		nbimg = slides.length - 1;›
 	}
 	img.src = slides[nbimg].image;
 	txt.innerHTML = slides[nbimg].tagLine;
 	DotFull(nbimg);
 }
-function slideRight(){
+function slideRight() {
 	nbimg++;
 	if (nbimg === slides.length) {
 		nbimg = 0;
@@ -76,8 +76,6 @@ function slideRight(){
 	txt.innerHTML = slides[nbimg].tagLine;
 	DotFull(nbimg);
 }
-
-
 
 // MAJ des voyants bullets a chaque changemnt 
 function DotFull(count) {
