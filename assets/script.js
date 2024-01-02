@@ -1,4 +1,4 @@
-//  nbimg nombre image 
+//  imageNumber nombre image 
 const slides = [
 
 	{
@@ -18,72 +18,73 @@ const slides = [
 		tagLine: "Autocollants <span>avec découpe laser sur mesure</span>",
 	},
 ];
-// affiche dans la console le nb de slides dans ma boite 
-console.log(slides)
 
 // relie Constante/variable et nom html
-let nbimg = 0;
-const leftbtn = document.querySelector(".arrow_left");
-const rightbtn = document.querySelector(".arrow_right");
+let imageNumber = 0;
+const leftButton = document.querySelector(".arrow_left");
+const rightButton = document.querySelector(".arrow_right");
 const dotsContainer = document.querySelector(".dots");
-const img = document.querySelector(".banner-img");
-const txt = document.querySelector("p");
+const image = document.querySelector(".banner-image");
+const texte = document.querySelector("p");
 
+// Creations de ma fonction dynamicSlide pour rendre les Slide dynamic
+function dynamicSlide() {
 
-// Creations des points .dot en fonction du nobre de slides image
-for (let j = nbimg; j < slides.length; j++) {
-	const dot = document.createElement("div");
-	dot.classList.add("dot");
-	// bullet change sur la bonne icone en cliquant 
-	dot.addEventListener("click", function () {
-		nbimg = j
-		img.src = slides[nbimg].image;
-		txt.innerHTML = slides[nbimg].tagLine;
-		DotFull(nbimg);
-	})
-	dotsContainer.appendChild(dot);
+	// Écouteurs de l'événements click  pour les fleches droites et gauches
+	leftButton.addEventListener("click", slideLeft);
+	rightButton.addEventListener("click", slideRight);
+
+	//pour les bullets
+	for (let j = imageNumber; j < slides.length; j++) {
+		const dot = document.createElement("div");
+		dot.classList.add("dot");
+		dotFull(imageNumber);
+
+		// bullet change sur la bonne icone en cliquant 
+		dot.addEventListener("click", function () {
+			imageNumber = j
+			image.src = slides[imageNumber].image;
+			texte.innerHTML = slides[imageNumber].tagLine;
+			console.log("dot")
+			dotFull(imageNumber);
+		})
+		dotsContainer.appendChild(dot);
+	}
 }
-
-
-// Sélectionnez à nouveau les éléments .dot après les avoir ajoutés
-const dotsbtn = dotsContainer.querySelectorAll(".dot");
-
-// Ajoutez la classe dot_selected à la première bullet (index 0)
-dotsbtn[0].classList.add("dot_selected");
-
-
-// Écouteurs de l'événements click  pour les boutons droit et gauche
-leftbtn.addEventListener("click", slideLeft);
-rightbtn.addEventListener("click", slideRight);
-
 
 // les fonctions appele pour changer les images
 function slideLeft() {
-	nbimg--;
-	if (nbimg === -1) {
-		nbimg = slides.length - 1;›
+	imageNumber--;
+	if (imageNumber === -1) {
+		imageNumber = slides.length - 1;
 	}
-	img.src = slides[nbimg].image;
-	txt.innerHTML = slides[nbimg].tagLine;
-	DotFull(nbimg);
+	image.src = slides[imageNumber].image;
+	texte.innerHTML = slides[imageNumber].tagLine;
+	dotFull(imageNumber);
 }
+
 function slideRight() {
-	nbimg++;
-	if (nbimg === slides.length) {
-		nbimg = 0;
+	imageNumber++;
+	if (imageNumber === slides.length) {
+		imageNumber = 0;
 	}
-	img.src = slides[nbimg].image;
-	txt.innerHTML = slides[nbimg].tagLine;
-	DotFull(nbimg);
+	image.src = slides[imageNumber].image;
+	texte.innerHTML = slides[imageNumber].tagLine;
+	dotFull(imageNumber);
 }
 
 // MAJ des voyants bullets a chaque changemnt 
-function DotFull(count) {
-	dotsbtn.forEach((dot, nbimg) => {
-		if (nbimg === count) {
+function dotFull(count) {
+
+	const dotsbtn = dotsContainer.querySelectorAll(".dot");
+
+	dotsbtn.forEach((dot, imageNumber) => {
+		if (imageNumber === count) {
 			dot.classList.add("dot_selected");
 		} else {
 			dot.classList.remove("dot_selected");
 		}
 	});
 }
+
+dynamicSlide();
